@@ -1,0 +1,203 @@
+<div style="background-color: #f9fafa;">
+  <mat-horizontal-stepper #stepper>
+    <mat-step label="Personal Details" style="background-color: #f9fafa;" >
+      <div class="aligncenter">
+        <h3>Add your personal details</h3>
+        <p class="tagline">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <div class="center">
+          <div class="forms">
+            <form [formGroup]="registerForm"  (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" formControlName="fullName" class="form-control" 
+                  [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+                <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                  <div *ngIf="f.fullName.errors.required">Fullname is required</div>
+                  <div *ngIf="f.fullName.errors.pattern">Fullname must be characters only</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <div class="row switch-field" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                  <div class="col-sm-3">
+                    <input type="radio" id="radio-one" formControlName="gender" value="male" />
+                    <label for="radio-one">Male</label>
+                  </div>
+                  <div class="col-sm-3">
+                    <input type="radio" id="radio-two" formControlName="gender" value="female" />
+                    <label for="radio-two">Female</label>
+                  </div>
+                  <div class="col-sm-3">
+                    <input type="radio" id="radio-three" formControlName="gender" value="other" />
+                    <label for="radio-three">Other</label>
+                  </div>
+                </div>
+                <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                  <div *ngIf="f.gender.errors.required">Gender is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select class="form-control" id="country" formControlName="country"
+                  [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                  <option><b>India</b></option>
+                </select>
+                <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                  <div *ngIf="f.country.errors.required">Country is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <select class="form-control" id="state" formControlName="state"
+                  [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                  <option><b>Tamil Nadu</b></option>
+                </select>
+                <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                  <div *ngIf="f.state.errors.required">State is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label><br>
+                <!-- <input type="tel" formControlName="phone" class="form-control" minlength="10" maxlength="10" pattern="[0-9]*"
+                  [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" /> -->
+                <input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'in'}" style="width:378px"
+                  (ng2TelOutput)="getNumber($event)" minlength="10" maxlength="10"
+                  (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
+                  formControlName="phone" class="form-control" />
+                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                  <div *ngIf="f.phone.errors.required">Phone Number is required</div>
+                  <div *ngIf="f.phone.errors.minlength">Phone Number must be 10 digit</div>
+                  <div *ngIf="f.phone.errors.pattern">Phone Number must be digit</div>
+                </div>
+              </div>
+            </form>
+            <br />
+            <div>
+              <button mat-button matStepperNext
+                style="color:white;width:100%;text-align: center;background-color: #ED5901;">Next</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </mat-step>
+    <mat-step label="Company Details" style="background-color: #f9fafa;" >
+      <div class="aligncenter">
+        <h3>Add your personal details</h3>
+        <p class="tagline">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <div class="center">
+          <div class="forms">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="assets/dummy.jpg" style="border-radius: 50%;height:80px;width:80px;object-fit: cover;">
+                  </div>
+                  <div class="col-sm-8">
+                    <span style="color:#ED5901;font-size: 15px;position: relative;top:33px"> Upload your company
+                      logo</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="companyname">Company Name</label>
+                <input type="text" formControlName="companyname" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.companyname.errors }" />
+                <div *ngIf="submitted && f.companyname.errors" class="invalid-feedback">
+                  <div *ngIf="f.companyname.errors.required">Companyname is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email id</label>
+                <input type="text" formControlName="email" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email id is required</div>
+                  <div *ngIf="f.email.errors.pattern">Email id is not valid</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="jobtitle">Job Title</label>
+                <input type="text" formControlName="jobtitle" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.jobtitle.errors }" />
+                <div *ngIf="submitted && f.jobtitle.errors" class="invalid-feedback">
+                  <div *ngIf="f.jobtitle.errors.required">Job Title is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="experience">Years of Experience</label>
+                <input type="tel" formControlName="experience" class="form-control" minlength="1"
+                  maxlength="2" [ngClass]="{ 'is-invalid': submitted && f.experience.errors }" />
+                <div *ngIf="submitted && f.experience.errors" class="invalid-feedback">
+                  <div *ngIf="f.experience.errors.required">Years of Experience is required</div>
+                  <div *ngIf="f.experience.errors.pattern">Years of Experience must be digits</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="termscheck" value="1" [ngClass]="{ 'is-invalid': submitted && f.termscheck.errors }">
+                  <label class="form-check-label" for="termscheck">
+                    I accept the <span style="color:#ED5901">Terms and Conditions</span>
+                  </label>
+                  <div *ngIf="submitted && f.termscheck.errors" class="invalid-feedback">
+                    <div *ngIf="f.termscheck.errors.required">Please accept the terms and conditions</div>
+                  </div>
+                </div> -->
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" formControlName="termscheck" id="termscheck" value="1"
+                    [ngClass]="{ 'is-invalid': submitted && f.termscheck.errors }">
+                  <label class="form-check-label" for="termscheck">I accept the <span style="color:#ED5901">Terms and
+                      Conditions</span>
+                  </label>
+                  <div *ngIf="submitted && f.termscheck.errors" class="invalid-feedback">
+                    <div *ngIf="f.termscheck.errors.required">Please accept the terms and conditions</div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button mat-button matStepperPrevious
+                  style="color:black;width:20%;text-align: center;background-color: #F4F6F7;margin:8px">Back</button>
+                <button mat-button 
+                  style="color:white;width:75%;text-align: center;background-color: #ED5901;">Send Otp</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step label="Email Verfication" style="background-color: #f9fafa;" >
+      <div class="aligncenter">
+        <h3>Enter your OTP</h3>
+        <p class="tagline">For your security, we need to verify your identity. We sent a 5-digit
+          code to name@domain.com. Please enter it below.</p>
+        <div class="center">
+          <div class="forms">
+            <form>
+              <div class="form-group">
+                <label for="otp">Enter your code</label>
+                <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+              </div>
+            </form>
+            <div>
+              <button mat-button matStepperPrevious
+                style="color:black;width:20%;text-align: center;background-color: #F4F6F7;margin:8px">Back</button>
+              <button mat-button routerLink="/welcome"
+                style="color:white;width:75%;text-align: center;background-color: #ED5901;"
+                [disabled]="!registerForm.valid">Verify</button>
+            </div>
+          </div>
+          <div style="border-top:2px solid #ECECEC">
+            <p style="text-align: center;font-size: 15px;line-height: 26px;">Didn’t receive the email? Check your spam
+              filter for an email</p>
+            <p style="text-align: center;font-size: 15px;line-height: 26px;">from <span
+                style="color:#ED5901">name@domain.com</span></p>
+          </div>
+        </div>
+
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+</div>
