@@ -10,6 +10,10 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +29,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     ReactiveFormsModule,
     NgOtpInputModule,
     Ng2TelInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
