@@ -89,6 +89,7 @@ export class HomeComponent implements OnInit {
     this.registerForm.value.country = this.selectedcountry.name;
     console.log(this.registerForm.value.country);
     console.log(this.selectedcountry);
+    this.state=[];
     this.http.get('assets/states.json', {})
       .subscribe((res: any) => {
         let state = res.states;
